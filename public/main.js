@@ -46,6 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML += propertyCard;
       });
 
+      // Re-attach click event listener for each property card
+      document.querySelectorAll('.property-card').forEach(card => {
+        card.addEventListener('click', function () {
+          console.log('Card clicked:', this.id); // Debugging
+          const propertyId = parseInt(this.id.replace('property-', ''));
+          const property = properties.find(p => p.id === propertyId);
+          if (property) {
+            openPropertyDetails(property);
+          }
+        });
+      });
+
+      // Re-attach click events for favorite buttons
       document.querySelectorAll('.favorite-button').forEach(button => {
         button.removeEventListener('click', handleFavoriteButtonClick);
         button.addEventListener('click', handleFavoriteButtonClick);
@@ -54,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleFavoriteButtonClick(event) {
-    event.stopPropagation();
+    event.stopPropagation(); // Prevent card click event from firing
     const button = event.currentTarget;
     const propertyId = parseInt(button.dataset.id);
     const property = properties.find(p => p.id === propertyId);
@@ -77,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProperties('#property-container-home', properties); // Update home page
     displayProperties('#property-container-search', filterProperties('')); // Update search page
   }
+  
 
   function displayFavorites() {
     displayProperties('#property-container-favorites', favoriteProperties);
@@ -122,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Switch to home page
     showPage('home-page');
   });*/
-
   function showPage(pageId) {
     document.getElementById('home-page').classList.add('hidden');
     document.getElementById('search-page').classList.add('hidden');
@@ -152,59 +165,47 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
   });
 
-  // Display the user details form initially
- // showPage('user-details-form');
+  // Display the home page initially
   showPage('home-page');
 
   // Function to open the property details page
-function openPropertyDetails(property) {
-  // Update image, name, location, and price
-  document.getElementById('property-detail-img').src = property.img;
-  document.getElementById('property-detail-name').innerText = property.name;
-  document.getElementById('property-detail-location').innerText = property.location;
-  document.getElementById('property-detail-price').innerText = `₹ ${property.price}/month`;
-
-  // Set initial payment details
-  const periodBtns = document.querySelectorAll('.period-btn');
-  let selectedPeriod = 6;
-  updatePaymentDetails(selectedPeriod, property.price);
-
-  periodBtns.forEach(btn => {
+  function openPropertyDetails(property) {
+    // Update image, name, location, and price
+    document.getElementById('property-detail-img').src = property.img;
+    document.getElementById('property-detail-name').innerText = property.name;
+    document.getElementById('property-detail-location').innerText = property.location;
+    document.getElementById('property-detail-price').innerText = `₹ ${property.price}/month`;
+  
+    // Set initial payment details
+    const periodBtns = document.querySelectorAll('.period-btn');
+    let selectedPeriod = 6; // Default period
+    updatePaymentDetails(selectedPeriod, property.price);
+  
+    periodBtns.forEach(btn => {
       btn.addEventListener('click', function () {
-          selectedPeriod = parseInt(this.dataset.period);
-          updatePaymentDetails(selectedPeriod, property.price);
-
-          // Update selected button style
-          periodBtns.forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
-          btn.classList.add('bg-blue-600', 'text-white');
+        selectedPeriod = parseInt(this.dataset.period);
+        updatePaymentDetails(selectedPeriod, property.price);
+  
+        // Update selected button style
+        periodBtns.forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
+        btn.classList.add('bg-blue-600', 'text-white');
       });
+    });
+
+    // Switch to the details page
+    showPage('property-details-page');
+  }
+
+  // Update payment details based on selected period
+  function updatePaymentDetails(period, price) {
+    const totalPrice = period * price;
+    document.getElementById('selected-period').innerText = `${period} months`;
+    document.getElementById('monthly-payment').innerText = price;
+    document.getElementById('total-payment').innerText = totalPrice;
+  }
+
+  // Back to property list
+  document.getElementById('back-to-list-button').addEventListener('click', function () {
+    showPage('home-page');
   });
-
-  showPage('property-details-page');
-}
-
-// Update payment details based on selected period
-function updatePaymentDetails(period, price) {
-  const totalPrice = period * price;
-  document.getElementById('selected-period').innerText = `${period} months`;
-  document.getElementById('monthly-payment').innerText = price;
-  document.getElementById('total-payment').innerText = totalPrice;
-}
-
-// Add click events to property cards to open details
-document.querySelectorAll('.property-card').forEach(card => {
-  card.addEventListener('click', function () {
-      console.log('Card clicked:', this.id); // Debugging
-      const propertyId = parseInt(this.id.replace('property-', ''));
-      const property = properties.find(p => p.id === propertyId);
-      if (property) {
-          openPropertyDetails(property);}
-  });
-});
-
-// Back to property list
-document.getElementById('back-to-list-button').addEventListener('click', function () {
-  showPage('home-page');
-});
-
 });

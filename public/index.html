@@ -86,24 +86,26 @@
       <button id="back-to-list-button" class="bg-blue-100 p-3 rounded-full text-blue-900 hover:bg-blue-200">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <h1 class="text-2xl text-center font-bold text-black">Property Details</h1>
+      <h1 class="text-2xl text-center font-bold text-black">Transaction Review</h1>
     </div>
   
-    <div class="property-image-container mt-4">
-      <img src="" id="property-detail-img" class="w-full h-60 rounded-lg object-cover">
-    </div>
-  
-    <div class="property-info mt-4 p-4 bg-white rounded-lg shadow-lg">
-      <h2 id="property-detail-name" class="text-2xl font-bold"></h2>
-      <p id="property-detail-location" class="text-gray-500"></p>
-      <p id="property-detail-price" class="text-xl font-bold mt-2"></p>
+    <div class="property-card bg-blue-100 p-4 rounded-lg shadow-lg flex items-center space-x-4 card cursor-pointer relative">
+      <button id="property-details-favorite-btn" class="absolute top-2 right-2 text-black hover:text-red-700 favorite-button">
+        <i id="property-details-favorite-icon" class="fa-regular fa-heart"></i>
+      </button>
+      <img src="" id="property-detail-img" class="w-60 h-60 rounded-lg">
+      <div class="ml-24">
+        <h2 id="property-detail-name" class="text-lg font-semibold"></h2>
+        <p id="property-detail-location" class="text-sm text-gray-500"></p>
+        <p id="property-detail-price" class="text-lg font-bold"></p>
+      </div>
     </div>
   
     <div class="select-period mt-4 p-4 bg-white rounded-lg shadow-lg">
       <h3 class="text-lg font-bold">Select Period</h3>
       <div class="flex space-x-2 mt-2">
         <button class="period-btn bg-gray-100 p-2 rounded-lg" data-period="3">3 months</button>
-        <button class="period-btn bg-blue-600 text-white p-2 rounded-lg" data-period="6">6 months</button>
+        <button class="period-btn bg-gray-100 p-2 rounded-lg" data-period="6">6 months</button>
         <button class="period-btn bg-gray-100 p-2 rounded-lg" data-period="9">9 months</button>
       </div>
     </div>
@@ -116,7 +118,8 @@
     </div>
   
     <button class="w-full mt-4 p-2 bg-blue-600 text-white rounded-lg">Pay with Circle</button>
-</section>
+  </section>
+  
 
   <!-- Bottom Navigation -->
   <footer class="footer p-4 shadow-lg fixed bottom-0 inset-x-0 flex justify-around bg-white">
