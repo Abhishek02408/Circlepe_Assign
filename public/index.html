@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Listings</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"> <!-- Custom CSS -->
+  <script src="https://kit.fontawesome.com/a6c22c10c7.js" crossorigin="anonymous"></script>
+  <script src="main.js"></script> <!-- JavaScript -->
+</head>
+<body class="bg-gray-50">
+
+  <!-- Home Page Section -->
+  <section id="home-page" class="p-4">
+    <h1 class="text-5xl font-bold text-center text-blue-900">Welcome to Property Listings</h1>
+    <p class="text-center text-gray-600">Find your perfect home or favorite properties!</p>
+    <div id="property-container-home" class="mt-6 space-y-4">
+      <!-- Property Cards for Home Page will be dynamically inserted here via JavaScript -->
+    </div>
+  </section>
+
+  <!-- Search Page Section -->
+  <section id="search-page" class="p-4 hidden">
+    <h1 class="text-center text-2xl font-bold text-black">Search Results</h1>
+    <div class="flex items-center justify-between p-2 rounded-lg shadow-lg bg-white">
+      <input type="text" id="search-input" placeholder="Search" class="flex-grow px-4 py-2 text-gray-700 bg-transparent focus:outline-none" />
+      <button class="p-2">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button class="p-2">
+        <i class="fa-solid fa-sliders"></i>
+      </button>
+    </div>
+    <div id="property-container-search" class="mt-6 space-y-4">
+      <!-- Property Cards for Search Page will be dynamically inserted here via JavaScript -->
+    </div>
+  </section>
+
+  <!-- Favorites Page -->
+  <section id="favorites-page" class="p-4 hidden">
+    <h2 class="text-2xl font-bold text-blue-900">Your Favorites</h2>
+    <div id="property-container-favorites" class="mt-4 space-y-4">
+      <!-- Favorite properties will be displayed here via JavaScript -->
+    </div>
+  </section>
+
+  <!-- User Page Section -->
+  <section id="user-page" class="p-4 hidden">
+    <h2 class="text-2xl font-bold text-blue-900">User Profile</h2>
+    <p class="text-gray-600">Manage your account settings.</p>
+  </section>
+
+  <!-- Bottom Navigation -->
+  <footer class="footer p-4 shadow-lg fixed bottom-0 inset-x-0 flex justify-around bg-white">
+    <a href="#" class="text-blue-900 hover:text-blue-600" id="home-btn">
+      <i class="fa-solid fa-house"></i>
+    </a>
+    <a href="#" class="text-blue-900 hover:text-blue-600" id="search-btn">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </a>
+    <a href="#" class="text-blue-900 hover:text-blue-600" id="favorites-btn">
+      <i class="fa-solid fa-heart"></i>
+    </a>
+    <a href="#" class="text-blue-900 hover:text-blue-600" id="user-btn">
+      <i class="fa-solid fa-user"></i>
+    </a>
+  </footer>
+</body>
+</html>
