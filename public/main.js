@@ -203,6 +203,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('monthly-payment').innerText = price;
     document.getElementById('total-payment').innerText = totalPrice;
   }
+  
+  const payButton = document.querySelector('.w-full.mt-4.p-2.bg-blue-600'); // Pay with Circle button on property details page
+  const modal = document.getElementById('payment-modal');
+  const closeModal = document.getElementById('close-modal');
+
+  // Open the modal when the Pay with Circle button is clicked
+  payButton.addEventListener('click', (event) => {
+    event.stopPropagation(); // Ensure the modal only opens without triggering other events
+    modal.classList.remove('hidden');
+  });
+
+  // Close the modal when the close button is clicked
+  closeModal.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  // Close modal when clicking outside of the modal content
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
 
   // Back to property list
   document.getElementById('back-to-list-button').addEventListener('click', function () {
