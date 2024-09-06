@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   let favoriteProperties = [];
+  let userDetails = {};
 
   function updateFavoriteButton(button, isFavorited) {
     const icon = button.querySelector('i');
@@ -70,9 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
       alert(`${property.name} added to favorites.`);
     }
 
+    // Update all pages
     updateFavoriteButton(button, !isFavorited);
     displayFavorites(); // Update favorites page
     displayProperties('#property-container-home', properties); // Update home page
+    displayProperties('#property-container-search', filterProperties('')); // Update search page
   }
 
   function displayFavorites() {
@@ -97,7 +100,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  displayProperties('#property-container-home', properties);
+  document.getElementById('details-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById('user-name').value;
+    const email = document.getElementById('user-email').value;
+    const phone = document.getElementById('user-phone').value;
+
+    userDetails = { name, email, phone };
+
+    // Update user profile page with user details
+    document.getElementById('user-profile-info').innerHTML = `
+      <p><strong>Name:</strong> ${userDetails.name}</p>
+      <p><strong>Email:</strong> ${userDetails.email}</p>
+      <p><strong>Phone:</strong> ${userDetails.phone}</p>
+    `;
+
+    // Update the home page properties
+    displayProperties('#property-container-home', properties);
+
+    // Switch to home page
+    showPage('home-page');
+  });
+
+  function showPage(pageId) {
+    document.getElementById('user-details-form').classList.add('hidden');
+    document.getElementById('home-page').classList.add('hidden');
+    document.getElementById('search-page').classList.add('hidden');
+    document.getElementById('favorites-page').classList.add('hidden');
+    document.getElementById('user-page').classList.add('hidden');
+    document.getElementById(pageId).classList.remove('hidden');
+  }
 
   document.getElementById('home-btn').addEventListener('click', function() {
     showPage('home-page');
@@ -115,13 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('user-page');
   });
 
-  function showPage(pageId) {
-    document.getElementById('home-page').classList.add('hidden');
-    document.getElementById('search-page').classList.add('hidden');
-    document.getElementById('favorites-page').classList.add('hidden');
-    document.getElementById('user-page').classList.add('hidden');
-    document.getElementById(pageId).classList.remove('hidden');
-  }
-
-  showPage('home-page');
+  // Display the user details form initially
+  showPage('user-details-form');
 });
