@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  document.getElementById('details-form').addEventListener('submit', (event) => {
+  /*document.getElementById('details-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
     const name = document.getElementById('user-name').value;
@@ -121,14 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Switch to home page
     showPage('home-page');
-  });
+  });*/
 
   function showPage(pageId) {
-    document.getElementById('user-details-form').classList.add('hidden');
     document.getElementById('home-page').classList.add('hidden');
     document.getElementById('search-page').classList.add('hidden');
     document.getElementById('favorites-page').classList.add('hidden');
     document.getElementById('user-page').classList.add('hidden');
+    document.getElementById('property-details-page').classList.add('hidden');
     document.getElementById(pageId).classList.remove('hidden');
   }
 
@@ -148,6 +148,63 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('user-page');
   });
 
+  document.getElementById('back-button').addEventListener('click', function() {
+    showPage('home-page');
+  });
+
   // Display the user details form initially
-  showPage('user-details-form');
+ // showPage('user-details-form');
+  showPage('home-page');
+
+  // Function to open the property details page
+function openPropertyDetails(property) {
+  // Update image, name, location, and price
+  document.getElementById('property-detail-img').src = property.img;
+  document.getElementById('property-detail-name').innerText = property.name;
+  document.getElementById('property-detail-location').innerText = property.location;
+  document.getElementById('property-detail-price').innerText = `₹ ${property.price}/month`;
+
+  // Set initial payment details
+  const periodBtns = document.querySelectorAll('.period-btn');
+  let selectedPeriod = 6;
+  updatePaymentDetails(selectedPeriod, property.price);
+
+  periodBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+          selectedPeriod = parseInt(this.dataset.period);
+          updatePaymentDetails(selectedPeriod, property.price);
+
+          // Update selected button style
+          periodBtns.forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
+          btn.classList.add('bg-blue-600', 'text-white');
+      });
+  });
+
+  showPage('property-details-page');
+}
+
+// Update payment details based on selected period
+function updatePaymentDetails(period, price) {
+  const totalPrice = period * price;
+  document.getElementById('selected-period').innerText = `${period} months`;
+  document.getElementById('monthly-payment').innerText = price;
+  document.getElementById('total-payment').innerText = totalPrice;
+}
+
+// Add click events to property cards to open details
+document.querySelectorAll('.property-card').forEach(card => {
+  card.addEventListener('click', function () {
+      console.log('Card clicked:', this.id); // Debugging
+      const propertyId = parseInt(this.id.replace('property-', ''));
+      const property = properties.find(p => p.id === propertyId);
+      if (property) {
+          openPropertyDetails(property);}
+  });
+});
+
+// Back to property list
+document.getElementById('back-to-list-button').addEventListener('click', function () {
+  showPage('home-page');
+});
+
 });
