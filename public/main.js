@@ -261,16 +261,40 @@ payWithCircleButton.addEventListener('click', () => {
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/a6c22c10c7.js" crossorigin="anonymous"></script>
       </head>
-      <body class="bg-gray-100 flex flex-col justify-center items-center h-screen">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
-          <h1 class="text-2xl font-bold text-blue-900 mb-4">Pay with Circle</h1>
-          <div class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-700">Property: ${propertyName}</h2>
-            <p class="text-lg text-gray-500">Reduced Rent Offer: ₹ ${calculateReducedPrice(currentPropertyPrice)}</p>
-          </div>
-          <button class="mt-4 p-3 bg-blue-600 text-white rounded-lg">Proceed with Circle</button>
-          <button id="go-back-btn" class="mt-4 text-blue-600 underline"><br>Go Back</button>
+      <body class="bg-gray-100 ">
+        <div class="container mx-auto p-4">
+        
+            <h1 class="text-2xl font-bold text-center mb-4">Circle<Sub>App</h1>
+            <h2 class="text-lg font-semibold m-6 text-center bg-blue-100 rounded-lg">Rent at <span class="text-blue-600">Zero</span> Security Deposit</h2>
+  <h3 class="text-gray-700">Set-up No Cost EMI in 3 steps<br></h3>
+            <div class="bg-white rounded-lg shadow-md   
+ p-6">
+            <div class="flex flex-col space-y-4">
+                
+                    <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg ">1. Eligibility Check</h3>
+                    <ul class="list-disc pl-6">
+                        <li>Basic Details (PAN & DOB)</li>
+                        <li>Work Details (Employment Details)</li>
+                    </ul>
+                    <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">2. Setup AutoPay</h3>
+                    <ul class="list-disc pl-6">
+                        <li>Bank Details (Salary Account Details)</li>
+                        <li>Identity Verification (Selfie & Aadhaar KYC)</li>
+                    </ul>
+                    <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">3. Move-In</h3>
+                    </div>
+            </div>
+           <div class="flex items-center mb-4">
+            <input type="checkbox" id="terms-agreement" class="mr-2">
+            <label for="terms-agreement" class="text-sm text-gray-600">
+                By clicking this, you agree to our <a href="#" class="text-blue-600 underline">terms and conditions</a> and <a href="#" class="text-blue-600 underline">privacy policy</a>.
+            </label>
         </div>
+             <div class="text-center">
+           <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg">Get Started ></button></div>
+          <div class="text-center"><button id="go-back-btn" class="mt-4 text-blue-600 underline">Go Back</button>
+        </div>
+          </div>
       </body>
       <script>
         // Add Go Back button functionality to return to the previous page
