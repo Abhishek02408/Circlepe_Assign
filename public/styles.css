@@ -5,6 +5,7 @@ html {
 }
 
 body {
+  overflow-x:hidden;
   font-family: 'Poppins', sans-serif; /* or any font from your Figma */
 }
 
