@@ -81,6 +81,8 @@ To run this project locally, follow these steps:
 - Make sure to test the changes in different browsers to ensure compatibility.
 - Check for responsiveness on various devices.
 
+     **OR**
+
 ## Future Enhancements
 - **Improved Accessibility**: Enhance the application’s accessibility to ensure it is usable by people with disabilities.
 - **Performance Optimization**: Optimize loading times and performance, especially for dynamic content.
