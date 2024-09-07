@@ -153,8 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = ['home-page', 'search-page', 'favorites-page', 'user-page', 'property-details-page'];
     pages.forEach(page => document.getElementById(page).classList.add('hidden'));
     document.getElementById(pageId).classList.remove('hidden');
+  // Update active footer button
+  const footerLinks = document.querySelectorAll('.footer a');
+  footerLinks.forEach(link => {
+    if (link.id === pageId.replace('-page', '-btn')) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
   }
-
   document.getElementById('home-btn').addEventListener('click', function() {
     showPage('home-page');
   });
