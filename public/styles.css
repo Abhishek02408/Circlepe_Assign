@@ -76,7 +76,6 @@ button:hover img {
 #property-container-home, 
 #property-container-search, 
 #property-container-favorites, 
-#property-container-details {
-  padding-bottom: 4rem; /* Adjust this value based on the footer height */
+#property-container-details,#pwc {
+  margin-bottom: 4rem; /* Adjust this value based on the footer height */
 }
-#pwc{margin-bottom: 4rem;}
