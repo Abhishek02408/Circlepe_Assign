@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isFavorited = favoriteProperties.some(fav => fav.id === property.id);
         const propertyCard = `
           <div id="property-${property.id}" class="property-card bg-blue-100 p-4 rounded-lg shadow-lg flex items-center space-x-4 card cursor-pointer relative">
-            <button class="absolute top-2 right-2 text-black hover:text-red-700 favorite-button" data-id="${property.id}">
+            <button class="absolute top-4 left-9 text-red-600 hover:text-red-700 favorite-button rounded-full bg-white " data-id="${property.id}">
               <i class="fa-${isFavorited ? 'solid' : 'regular'} fa-heart"></i>
             </button>
             <img src="${property.img}" alt="${property.name}" class="w-20 h-20 rounded-lg">
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Close user details form modal
-  document.getElementById('close-user-details').addEventListener('click', () => {
+    document.getElementById('close-user-details').addEventListener('click', () => {
     document.getElementById('user-details-modal').classList.add('hidden');
     showPage('home-page');
   });
