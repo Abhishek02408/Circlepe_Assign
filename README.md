@@ -40,6 +40,18 @@ This project is a web application designed to display property listings, allow u
 
 **Solution**: Used Tailwind CSS classes to manage the visibility of the filter popup and implemented JavaScript to toggle these classes based on user interactions.
 
+
+## Running the Project Locally
+
+To run this project locally, follow these steps:
+
+1. **Clone the Repository**
+
+   If you haven’t already, clone the repository to your local machine:
+
+   ```bash
+   git clone <repository-url>
+
 ## Future Enhancements
 - **Improved Accessibility**: Enhance the application’s accessibility to ensure it is usable by people with disabilities.
 - **Performance Optimization**: Optimize loading times and performance, especially for dynamic content.
