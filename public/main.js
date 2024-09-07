@@ -1,13 +1,17 @@
+//Loading DOM to manage different objects
 document.addEventListener('DOMContentLoaded', () => {
+  
+  //Making Scrolling control smooth
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-  
       document.querySelector(this.getAttribute('href')).scrollIntoView({
         behavior: 'smooth'
       });
     });
   });
+  
+  //Property Object
   const properties = [
     { id: 1, name: "Sky Dandelions Apartment", location: "Sector 28, Gurgaon", price: 22000, img: "sky_dan.jpg" },
     { id: 2, name: "Wings Tower", location: "Sector 27, Gurgaon", price: 17000, img: "wing_tower.jpg" },
@@ -17,10 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 6, name: "Wayside Modern House", location: "MG Road, Delhi", price: 20000, img: "way_side.jpeg" },
   ];
 
-  let favoriteProperties = [];
-  let userDetails = {};
+  let favoriteProperties = [];//Stores favorite properties in array
+  let userDetails = {};//Stores User Details form
   let currentPropertyPrice = 0; // Store current property price for modal reduction
 
+ //Transition of favorite button
   function updateFavoriteButton(button, isFavorited) {
     const icon = button.querySelector('i');
     if (isFavorited) {
@@ -33,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       button.classList.remove('text-red-600');
     }
   }
-
   document.getElementById('filter-button').addEventListener('click', () => {
     document.getElementById('filter-popup').classList.remove('hidden');
   });
@@ -134,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProperties('#property-container-favorites', favoriteProperties);
   }
 
+  //Function of filter button
   function filterProperties(searchTerm) {
     const filteredProperties = properties.filter(property => {
       return property.name.toLowerCase().includes(searchTerm) ||
@@ -142,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     return filteredProperties;
   }
-
+ 
   const searchInput = document.querySelector('#search-input');
   if (searchInput) {
     searchInput.addEventListener('input', (event) => {
@@ -156,7 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = ['home-page', 'search-page', 'favorites-page', 'user-page', 'property-details-page'];
     pages.forEach(page => document.getElementById(page).classList.add('hidden'));
     document.getElementById(pageId).classList.remove('hidden');
-  // Update active footer button
+  
+    // Update active footer button
   const footerLinks = document.querySelectorAll('.footer a');
   footerLinks.forEach(link => {
     if (link.id === pageId.replace('-page', '-btn')) {
@@ -190,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
   });
 
+  
   function openPropertyDetails(property) {
     // Update image, name, location, and price
     document.getElementById('property-detail-img').src = property.img;
@@ -314,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg">Get Started ></button>
             </div>
             <div class="text-center">
-              <button id="go-back-btn" class="mt-4 text-blue-600 underline">Go Back</button>
+              <button id="go-back-btn" class="mt-4 text-blue-600 no-underline">Go Back</button>
             </div>
           </div>
         </body>
