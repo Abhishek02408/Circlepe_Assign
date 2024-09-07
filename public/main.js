@@ -166,7 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
   });
 
-  // Function to open the property details page
+  document.getElementById('back-to-list-button').addEventListener('click', function() {
+    showPage('home-page');
+  });
+
   function openPropertyDetails(property) {
     // Update image, name, location, and price
     document.getElementById('property-detail-img').src = property.img;
@@ -206,15 +209,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('total-payment').innerText = totalPrice;
   }
 
-  // Function to calculate the reduced price (for example, a 10% discount)
-  function calculateReducedPrice(price) {
+   // Function to calculate the reduced price (for example, a 10% discount)
+   function calculateReducedPrice(price) {
     const discount = 0.10; // 10% discount
     const reducedPrice = price - (price * discount);
     return reducedPrice.toFixed(2); // Round to 2 decimal places
   }
 
   // Open the modal when the Pay with Circle button is clicked
-  const payButton = document.querySelector('#property-details-page .w-full.mt-4.p-2.bg-blue-600'); // Pay with Circle button
+  const payButton = document.querySelector('#property-details-page .w-full.mt-4.p-2.bg-blue-600');
   const modal = document.getElementById('payment-modal');
   const closeModal = document.getElementById('close-modal');
 
@@ -315,4 +318,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initially display properties on home page
   displayProperties('#property-container-home', properties);
+
+  // Show user details form on page load
+  document.getElementById('user-details-modal').classList.remove('hidden');
+
+  // Handle user details form submission
+  document.getElementById('user-details-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    userDetails.name = document.getElementById('user-name').value;
+    userDetails.email = document.getElementById('user-email').value;
+    userDetails.phone = document.getElementById('user-phone').value;
+
+    // Update the user profile section
+    document.getElementById('user-profile-info').innerHTML = `
+      <p><strong>Name:</strong> ${userDetails.name}</p>
+      <p><strong>Email:</strong> ${userDetails.email}</p>
+      <p><strong>Phone:</strong> ${userDetails.phone}</p>
+    `;
+
+    // Hide the user details form and show the home page
+    document.getElementById('user-details-modal').classList.add('hidden');
+    showPage('home-page');
+  });
+
+  // Close user details form modal
+  document.getElementById('close-user-details').addEventListener('click', () => {
+    document.getElementById('user-details-modal').classList.add('hidden');
+    showPage('home-page');
+  });
 });

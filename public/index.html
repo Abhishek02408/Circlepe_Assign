@@ -12,6 +12,34 @@
 </head>
 
 <body class="bg-gray-50">
+<!--User Details Form -->
+<div id="user-details-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold text-blue-900">Enter Your Details</h2>
+      <button id="close-user-details" class="text-gray-500 hover:text-gray-700">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+    <form id="user-details-form">
+      <div class="space-y-4">
+        <div>
+          <label for="user-name" class="block text-sm font-semibold">Name</label>
+          <input type="text" id="user-name" class="w-full px-2 py-1 border border-gray-300 rounded-lg" required />
+        </div>
+        <div>
+          <label for="user-email" class="block text-sm font-semibold">Email</label>
+          <input type="email" id="user-email" class="w-full px-2 py-1 border border-gray-300 rounded-lg" required />
+        </div>
+        <div>
+          <label for="user-phone" class="block text-sm font-semibold">Phone</label>
+          <input type="tel" id="user-phone" class="w-full px-2 py-1 border border-gray-300 rounded-lg" required />
+        </div>
+      </div>
+      <button type="submit" class="w-full mt-4 p-2 bg-blue-600 text-white rounded-lg">Submit</button>
+    </form>
+  </div>
+</div>
 
   <!-- Home Page -->
   <section id="home-page" class="p-4">
