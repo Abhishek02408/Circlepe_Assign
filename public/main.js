@@ -213,109 +213,106 @@ document.addEventListener('DOMContentLoaded', () => {
     return reducedPrice.toFixed(2); // Round to 2 decimal places
   }
 
-// Open the modal when the Pay with Circle button is clicked
-const payButton = document.querySelector('#property-details-page .w-full.mt-4.p-2.bg-blue-600'); // Pay with Circle button
-const modal = document.getElementById('payment-modal');
-const closeModal = document.getElementById('close-modal');
+  // Open the modal when the Pay with Circle button is clicked
+  const payButton = document.querySelector('#property-details-page .w-full.mt-4.p-2.bg-blue-600'); // Pay with Circle button
+  const modal = document.getElementById('payment-modal');
+  const closeModal = document.getElementById('close-modal');
 
-payButton.addEventListener('click', (event) => {
-  event.stopPropagation(); // Ensure the modal only opens without triggering other events
+  payButton.addEventListener('click', (event) => {
+    event.stopPropagation(); // Ensure the modal only opens without triggering other events
 
-  // Calculate the reduced rent for the selected property
-  const reducedPrice = calculateReducedPrice(currentPropertyPrice);
+    // Calculate the reduced rent for the selected property
+    const reducedPrice = calculateReducedPrice(currentPropertyPrice);
 
-  // Update the modal rent offer with the reduced price
-  document.querySelector('.font-bold.text-lg.text-blue-900').innerText = `₹ ${reducedPrice}`;
+    // Update the modal rent offer with the reduced price
+    document.querySelector('.font-bold.text-lg.text-blue-900').innerText = `₹ ${reducedPrice}`;
 
-  // Open the modal
-  modal.classList.remove('hidden');
-});
+    // Open the modal
+    modal.classList.remove('hidden');
+  });
 
-// Close the modal when the close button is clicked
-closeModal.addEventListener('click', () => {
-  modal.classList.add('hidden');
-});
-
-// Close modal when clicking outside of the modal content
-modal.addEventListener('click', (event) => {
-  if (event.target === modal) {
+  // Close the modal when the close button is clicked
+  closeModal.addEventListener('click', () => {
     modal.classList.add('hidden');
-  }
-});
+  });
 
-// Pay with Circle button inside the modal
-const payWithCircleButton = document.getElementById('pay-with-circle-btn');
+  // Close modal when clicking outside of the modal content
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
 
-payWithCircleButton.addEventListener('click', () => {
-  // Retrieve property name dynamically from the modal or details page
-  const propertyName = document.getElementById('property-detail-name').innerText;
+  // Pay with Circle button inside the modal
+  const payWithCircleButton = document.getElementById('pay-with-circle-btn');
 
-  // Open a new page dynamically
-  const newPage = window.open('', '_blank');
+  payWithCircleButton.addEventListener('click', () => {
+    // Retrieve property name dynamically from the modal or details page
+    const propertyName = document.getElementById('property-detail-name').innerText;
 
-  // Write the dynamic structure of the new page
-  newPage.document.write(`
-    <html>
-      <head>
-        <title>Circle Payment</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/a6c22c10c7.js" crossorigin="anonymous"></script>
-      </head>
-      <body class="bg-gray-100 ">
-        <div class="container mx-auto p-4">
-        
+    // Open a new page dynamically
+    const newPage = window.open('', '_blank');
+
+    // Write the dynamic structure of the new page
+    newPage.document.write(`
+      <html>
+        <head>
+          <title>Circle Payment</title>
+          <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+          <script src="https://kit.fontawesome.com/a6c22c10c7.js" crossorigin="anonymous"></script>
+        </head>
+        <body class="bg-gray-100 ">
+          <div class="container mx-auto p-4">
             <h1 class="text-2xl font-bold text-center mb-4">Circle<Sub>App</h1>
             <h2 class="text-lg font-semibold m-6 text-center bg-blue-100 rounded-lg">Rent at <span class="text-blue-600">Zero</span> Security Deposit</h2>
-  <h3 class="text-gray-700">Set-up No Cost EMI in 3 steps<br></h3>
-            <div class="bg-white rounded-lg shadow-md   
- p-6">
-            <div class="flex flex-col space-y-4">
-                
-                    <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg ">1. Eligibility Check</h3>
-                    <ul class="list-disc pl-6">
-                        <li>Basic Details (PAN & DOB)</li>
-                        <li>Work Details (Employment Details)</li>
-                    </ul>
-                    <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">2. Setup AutoPay</h3>
-                    <ul class="list-disc pl-6">
-                        <li>Bank Details (Salary Account Details)</li>
-                        <li>Identity Verification (Selfie & Aadhaar KYC)</li>
-                    </ul>
-                    <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">3. Move-In</h3>
-                    </div>
+            <h3 class="text-gray-700">Set-up No Cost EMI in 3 steps<br></h3>
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="flex flex-col space-y-4">
+                <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">1. Eligibility Check</h3>
+                <ul class="list-disc pl-6">
+                  <li>Basic Details (PAN & DOB)</li>
+                  <li>Work Details (Employment Details)</li>
+                </ul>
+                <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">2. Setup AutoPay</h3>
+                <ul class="list-disc pl-6">
+                  <li>Bank Details (Salary Account Details)</li>
+                  <li>Identity Verification (Selfie & Aadhaar KYC)</li>
+                </ul>
+                <h3 class="text-lg text-blue-600 font-semibold bg-blue-100 rounded-lg">3. Move-In</h3>
+              </div>
             </div>
-           <div class="flex items-center mb-4">
-            <input type="checkbox" id="terms-agreement" class="mr-2">
-            <label for="terms-agreement" class="text-sm text-gray-600">
+            <div class="flex items-center mb-4">
+              <input type="checkbox" id="terms-agreement" class="mr-2">
+              <label for="terms-agreement" class="text-sm text-gray-600">
                 By clicking this, you agree to our <a href="#" class="text-blue-600 underline">terms and conditions</a> and <a href="#" class="text-blue-600 underline">privacy policy</a>.
-            </label>
-        </div>
-             <div class="text-center">
-           <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg">Get Started ></button></div>
-          <div class="text-center"><button id="go-back-btn" class="mt-4 text-blue-600 underline">Go Back</button>
-        </div>
+              </label>
+            </div>
+            <div class="text-center">
+              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-lg">Get Started ></button>
+            </div>
+            <div class="text-center">
+              <button id="go-back-btn" class="mt-4 text-blue-600 underline">Go Back</button>
+            </div>
           </div>
-      </body>
-      <script>
-        // Add Go Back button functionality to return to the previous page
-        document.getElementById('go-back-btn').addEventListener('click', () => {
-          window.close(); // Close the current page
-        });
-      </script>
-    </html>
-  `);
+        </body>
+        <script>
+          // Add Go Back button functionality to return to the previous page
+          document.getElementById('go-back-btn').addEventListener('click', () => {
+            window.close(); // Close the current page
+          });
+        </script>
+      </html>
+    `);
 
-  // Ensure the new page's document is finished loading
-  newPage.document.close();
+    // Ensure the new page's document is finished loading
+    newPage.document.close();
+  });
+
+  // Back to property list
+  document.getElementById('back-to-list-button').addEventListener('click', function () {
+    showPage('home-page');
+  });
+
+  // Initially display properties on home page
+  displayProperties('#property-container-home', properties);
 });
-
-
-// Back to property list
-document.getElementById('back-to-list-button').addEventListener('click', function () {
-  showPage('home-page');
-});
-});
-
-
- 
-
