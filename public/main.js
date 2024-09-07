@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let favoriteProperties = [];
   let userDetails = {};
+  let currentPropertyPrice = 0; // Store current property price for modal reduction
 
   function updateFavoriteButton(button, isFavorited) {
     const icon = button.querySelector('i');
@@ -20,6 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
       button.classList.remove('text-red-600');
     }
   }
+
+  document.getElementById('filter-button').addEventListener('click', () => {
+    document.getElementById('filter-popup').classList.remove('hidden');
+  });
+
+  // Close filter popup
+  document.getElementById('close-filter').addEventListener('click', () => {
+    document.getElementById('filter-popup').classList.add('hidden');
+  });
+
+  // Apply filters and update search results
+  document.getElementById('apply-filters').addEventListener('click', () => {
+    const name = document.getElementById('filter-name').value.toLowerCase();
+    const location = document.getElementById('filter-location').value.toLowerCase();
+    const maxPrice = parseFloat(document.getElementById('filter-price').value);
+
+    const filteredProperties = properties.filter(property => {
+      const matchesName = property.name.toLowerCase().includes(name);
+      const matchesLocation = property.location.toLowerCase().includes(location);
+      const matchesPrice = isNaN(maxPrice) || property.price <= maxPrice;
+
+      return matchesName && matchesLocation && matchesPrice;
+    });
+
+    displayProperties('#property-container-search', filteredProperties);
+    document.getElementById('filter-popup').classList.add('hidden'); // Close the popup
+  });
 
   function displayProperties(containerId, propertiesToShow) {
     const container = document.querySelector(containerId);
@@ -49,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Re-attach click event listener for each property card
       document.querySelectorAll('.property-card').forEach(card => {
         card.addEventListener('click', function () {
-          console.log('Card clicked:', this.id); // Debugging
           const propertyId = parseInt(this.id.replace('property-', ''));
           const property = properties.find(p => p.id === propertyId);
           if (property) {
@@ -90,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProperties('#property-container-home', properties); // Update home page
     displayProperties('#property-container-search', filterProperties('')); // Update search page
   }
-  
 
   function displayFavorites() {
     displayProperties('#property-container-favorites', favoriteProperties);
@@ -114,34 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /*document.getElementById('details-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById('user-name').value;
-    const email = document.getElementById('user-email').value;
-    const phone = document.getElementById('user-phone').value;
-
-    userDetails = { name, email, phone };
-
-    // Update user profile page with user details
-    document.getElementById('user-profile-info').innerHTML = `
-      <p><strong>Name:</strong> ${userDetails.name}</p>
-      <p><strong>Email:</strong> ${userDetails.email}</p>
-      <p><strong>Phone:</strong> ${userDetails.phone}</p>
-    `;
-
-    // Update the home page properties
-    displayProperties('#property-container-home', properties);
-
-    // Switch to home page
-    showPage('home-page');
-  });*/
   function showPage(pageId) {
-    document.getElementById('home-page').classList.add('hidden');
-    document.getElementById('search-page').classList.add('hidden');
-    document.getElementById('favorites-page').classList.add('hidden');
-    document.getElementById('user-page').classList.add('hidden');
-    document.getElementById('property-details-page').classList.add('hidden');
+    const pages = ['home-page', 'search-page', 'favorites-page', 'user-page', 'property-details-page'];
+    pages.forEach(page => document.getElementById(page).classList.add('hidden'));
     document.getElementById(pageId).classList.remove('hidden');
   }
 
@@ -165,9 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage('home-page');
   });
 
-  // Display the home page initially
-  showPage('home-page');
-
   // Function to open the property details page
   function openPropertyDetails(property) {
     // Update image, name, location, and price
@@ -175,22 +173,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('property-detail-name').innerText = property.name;
     document.getElementById('property-detail-location').innerText = property.location;
     document.getElementById('property-detail-price').innerText = `₹ ${property.price}/month`;
-  
+
     // Set initial payment details
     const periodBtns = document.querySelectorAll('.period-btn');
     let selectedPeriod = 6; // Default period
     updatePaymentDetails(selectedPeriod, property.price);
-  
+
     periodBtns.forEach(btn => {
+      btn.classList.remove('bg-blue-600', 'text-white'); // Clear previous selections
       btn.addEventListener('click', function () {
         selectedPeriod = parseInt(this.dataset.period);
         updatePaymentDetails(selectedPeriod, property.price);
-  
+
         // Update selected button style
         periodBtns.forEach(b => b.classList.remove('bg-blue-600', 'text-white'));
         btn.classList.add('bg-blue-600', 'text-white');
       });
     });
+
+    // Store the selected property's price globally for the modal
+    currentPropertyPrice = property.price;
 
     // Switch to the details page
     showPage('property-details-page');
@@ -203,31 +205,93 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('monthly-payment').innerText = price;
     document.getElementById('total-payment').innerText = totalPrice;
   }
-  
-  const payButton = document.querySelector('.w-full.mt-4.p-2.bg-blue-600'); // Pay with Circle button on property details page
-  const modal = document.getElementById('payment-modal');
-  const closeModal = document.getElementById('close-modal');
 
-  // Open the modal when the Pay with Circle button is clicked
-  payButton.addEventListener('click', (event) => {
-    event.stopPropagation(); // Ensure the modal only opens without triggering other events
-    modal.classList.remove('hidden');
-  });
+  // Function to calculate the reduced price (for example, a 10% discount)
+  function calculateReducedPrice(price) {
+    const discount = 0.10; // 10% discount
+    const reducedPrice = price - (price * discount);
+    return reducedPrice.toFixed(2); // Round to 2 decimal places
+  }
 
-  // Close the modal when the close button is clicked
-  closeModal.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
+// Open the modal when the Pay with Circle button is clicked
+const payButton = document.querySelector('#property-details-page .w-full.mt-4.p-2.bg-blue-600'); // Pay with Circle button
+const modal = document.getElementById('payment-modal');
+const closeModal = document.getElementById('close-modal');
 
-  // Close modal when clicking outside of the modal content
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.classList.add('hidden');
-    }
-  });
+payButton.addEventListener('click', (event) => {
+  event.stopPropagation(); // Ensure the modal only opens without triggering other events
 
-  // Back to property list
-  document.getElementById('back-to-list-button').addEventListener('click', function () {
-    showPage('home-page');
-  });
+  // Calculate the reduced rent for the selected property
+  const reducedPrice = calculateReducedPrice(currentPropertyPrice);
+
+  // Update the modal rent offer with the reduced price
+  document.querySelector('.font-bold.text-lg.text-blue-900').innerText = `₹ ${reducedPrice}`;
+
+  // Open the modal
+  modal.classList.remove('hidden');
 });
+
+// Close the modal when the close button is clicked
+closeModal.addEventListener('click', () => {
+  modal.classList.add('hidden');
+});
+
+// Close modal when clicking outside of the modal content
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.classList.add('hidden');
+  }
+});
+
+// Pay with Circle button inside the modal
+const payWithCircleButton = document.getElementById('pay-with-circle');
+
+payWithCircleButton.addEventListener('click', () => {
+  // Retrieve property name dynamically from the modal or details page
+  const propertyName = document.getElementById('property-detail-name').innerText;
+
+  // Open a new page dynamically
+  const newPage = window.open('', '_blank');
+
+  // Write the dynamic structure of the new page
+  newPage.document.write(`
+    <html>
+      <head>
+        <title>Circle App</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+      </head>
+      <body class="bg-gray-100 flex flex-col justify-center items-center h-screen">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold text-blue-900 mb-4">Circle App</h1>
+          <p class="text-lg text-gray-700 mb-8">Payment is being processed for <strong>${propertyName}</strong>...</p>
+        </div>
+
+        <!-- Go Back Button -->
+        <button id="go-back-btn" class="text-blue-600 underline mb-4">
+          Go Back
+        </button>
+
+        <script>
+          // Add event listener to the Go Back button
+          document.getElementById('go-back-btn').addEventListener('click', () => {
+            // Go back to the original page
+            window.history.back(); // This will take the user back to the previous page
+          });
+        </script>
+      </body>
+    </html>
+  `);
+
+  // Close the document writing
+  newPage.document.close();
+});
+
+// Back to property list
+document.getElementById('back-to-list-button').addEventListener('click', function () {
+  showPage('home-page');
+});
+});
+
+
+ 
+
