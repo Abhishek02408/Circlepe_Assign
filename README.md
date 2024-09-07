@@ -52,6 +52,35 @@ To run this project locally, follow these steps:
    ```bash
    git clone <repository-url>
 
+2. **Navigate to the Project Directory**
+
+   Change to the project directory:
+
+   ```bash
+   cd property-listings
+
+3. **Open the Project**
+
+- Open index.html in your preferred browser.You can do this by either:
+
+- Dragging and dropping the index.html file into your browser.
+
+- Using a local server to serve the files. If you have Python installed, you can run a simple HTTP server with:
+
+    ```bash
+    python -m http.server 8000
+- Then, navigate to http://localhost:8000 in your browser.
+
+4. **Modify Styles and Scripts**
+
+- **Custom Styles**: Edit styles.css to update custom styles.
+- **JavaScript**: Modify main.js to update JavaScript functionality.
+
+5. **Testing Changes**
+
+- Make sure to test the changes in different browsers to ensure compatibility.
+- Check for responsiveness on various devices.
+
 ## Future Enhancements
 - **Improved Accessibility**: Enhance the application’s accessibility to ensure it is usable by people with disabilities.
 - **Performance Optimization**: Optimize loading times and performance, especially for dynamic content.
