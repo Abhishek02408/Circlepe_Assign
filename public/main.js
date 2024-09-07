@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 1, name: "Sky Dandelions Apartment", location: "Sector 28, Gurgaon", price: 22000, img: "sky_dan.jpg" },
     { id: 2, name: "Wings Tower", location: "Sector 27, Gurgaon", price: 17000, img: "wing_tower.jpg" },
     { id: 3, name: "Wayside Modern House", location: "MG Road, Gurgaon", price: 18000, img: "way_side.jpeg" },
+    { id: 4, name: "Sky Dandelions Apartment", location: "Anand Vihar, Delhi", price: 24000, img: "sky_dan.jpg" },
+    { id: 5, name: "Wings Tower", location: "Nehru Vihar, Delhi", price: 27000, img: "wing_tower.jpg" },
+    { id: 6, name: "Wayside Modern House", location: "MG Road, Delhi", price: 20000, img: "way_side.jpeg" },
   ];
 
   let favoriteProperties = [];

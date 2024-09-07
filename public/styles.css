@@ -1,15 +1,15 @@
 /* Tailwind Base and Components */
 @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
-html {
-  scroll-behavior: smooth;
-}
+
 
 body {
-  overflow-x:hidden;
+ 
   font-family: 'Poppins', sans-serif; /* or any font from your Figma */
 }
 
 .header {
+  overflow-y: hidden;
+  overflow-x: hidden;
   background-color: #1b2838; /* Dark Blue background */
 }
 
@@ -43,6 +43,7 @@ input[type="text"] {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  
 }
 
 .footer a {
@@ -77,4 +78,10 @@ input[type="text"] {
 
 .favorite-button.text-red-700 {
   color: #e11d48; /* Tailwind red-700 */
+}
+#property-container-home, 
+#property-container-search, 
+#property-container-favorites, 
+#property-container-details {
+  padding-bottom: 4rem; /* Adjust this value based on the footer height */
 }
