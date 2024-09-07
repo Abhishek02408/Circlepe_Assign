@@ -12,9 +12,6 @@ This project is a web application designed to display property listings, allow u
 - **Font Awesome**: Integrated for iconography.
 - **JavaScript**: Implemented for interactive functionality, such as managing favorite buttons and handling user interactions.
 
-### Back-End
-- **Node.js**: Used for creating a persistent server-side application, managing HTTP requests, and interacting with databases (if implemented in future).
-
 ### Local Storage
 - **Local Storage**: Used for managing user favorites and maintaining state across page reloads.
 
@@ -44,7 +41,9 @@ This project is a web application designed to display property listings, allow u
 **Solution**: Used Tailwind CSS classes to manage the visibility of the filter popup and implemented JavaScript to toggle these classes based on user interactions.
 
 ## Future Enhancements
-
+- **Improved Accessibility**: Enhance the application’s accessibility to ensure it is usable by people with disabilities.
+- **Performance Optimization**: Optimize loading times and performance, especially for dynamic content.
+- **Integration with APIs**: Consider integrating with external APIs for real-time property data and updates.
 - **Back-End Integration**: Implement a back-end with Node.js to handle data persistence and user authentication.
 - **Database**: Integrate a database to store property listings, user details, and favorite properties.
 - **Advanced Filtering**: Improve the filter functionality with more advanced options and user-friendly interface elements.
