@@ -244,7 +244,7 @@ modal.addEventListener('click', (event) => {
 });
 
 // Pay with Circle button inside the modal
-const payWithCircleButton = document.getElementById('pay-with-circle');
+const payWithCircleButton = document.getElementById('pay-with-circle-btn');
 
 payWithCircleButton.addEventListener('click', () => {
   // Retrieve property name dynamically from the modal or details page
@@ -257,34 +257,34 @@ payWithCircleButton.addEventListener('click', () => {
   newPage.document.write(`
     <html>
       <head>
-        <title>Circle App</title>
+        <title>Circle Payment</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a6c22c10c7.js" crossorigin="anonymous"></script>
       </head>
       <body class="bg-gray-100 flex flex-col justify-center items-center h-screen">
-        <div class="text-center">
-          <h1 class="text-4xl font-bold text-blue-900 mb-4">Circle App</h1>
-          <p class="text-lg text-gray-700 mb-8">Payment is being processed for <strong>${propertyName}</strong>...</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
+          <h1 class="text-2xl font-bold text-blue-900 mb-4">Pay with Circle</h1>
+          <div class="mb-6">
+            <h2 class="text-xl font-semibold text-gray-700">Property: ${propertyName}</h2>
+            <p class="text-lg text-gray-500">Reduced Rent Offer: ₹ ${calculateReducedPrice(currentPropertyPrice)}</p>
+          </div>
+          <button class="mt-4 p-3 bg-blue-600 text-white rounded-lg">Proceed with Circle</button>
+          <button id="go-back-btn" class="mt-4 text-blue-600 underline"><br>Go Back</button>
         </div>
-
-        <!-- Go Back Button -->
-        <button id="go-back-btn" class="text-blue-600 underline mb-4">
-          Go Back
-        </button>
-
-        <script>
-          // Add event listener to the Go Back button
-          document.getElementById('go-back-btn').addEventListener('click', () => {
-            // Go back to the original page
-            window.history.back(); // This will take the user back to the previous page
-          });
-        </script>
       </body>
+      <script>
+        // Add Go Back button functionality to return to the previous page
+        document.getElementById('go-back-btn').addEventListener('click', () => {
+          window.close(); // Close the current page
+        });
+      </script>
     </html>
   `);
 
-  // Close the document writing
+  // Ensure the new page's document is finished loading
   newPage.document.close();
 });
+
 
 // Back to property list
 document.getElementById('back-to-list-button').addEventListener('click', function () {
