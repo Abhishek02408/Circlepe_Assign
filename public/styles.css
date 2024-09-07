@@ -1,7 +1,6 @@
 /* Tailwind Base and Components */
 @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
 
-
 body {
  
   font-family: 'Poppins', sans-serif; /* or any font from your Figma */
@@ -80,3 +79,4 @@ button:hover img {
 #property-container-details {
   padding-bottom: 4rem; /* Adjust this value based on the footer height */
 }
+#pwc{margin-bottom: 4rem;}
