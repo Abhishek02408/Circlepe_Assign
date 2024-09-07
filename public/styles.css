@@ -1,5 +1,8 @@
 /* Tailwind Base and Components */
 @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Poppins', sans-serif; /* or any font from your Figma */
